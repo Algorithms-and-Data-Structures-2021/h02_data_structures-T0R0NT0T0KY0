@@ -39,13 +39,14 @@ void LinkedList::Insert(int index, Element e) {
 	if (index==size_){
 		Add(e);
 	} else if (index==0){
-		Node *wasHead = new  Node(head_->data,head_->next);
-
-		head_->data = e;
-		head_->next = wasHead;
+//		Node *wasHead = new  Node(head_->data,head_->next);
+		Node* newHead = new Node(e,head_);
+		head_ = newHead;
+//		head_->data = e;
+//		head_->next = wasHead;
 		size_++;
 	} else {
-		Node *preNode = head_->next;
+		Node *preNode = head_;
 		for (int i = 0; i < index - 1; i++) {
 			preNode = preNode->next;
 		}
@@ -70,15 +71,23 @@ Element LinkedList::Remove(int index) {
   // Tip 1: рассмотрите случай, когда удаляется элемент в начале списка
   // Tip 2: используйте функцию find_node(index)
   // напишите свой код здесь ...
-    Node* preRemoveNode = head_->next;
+	if (index == 0){
+		Node* newHead = head_->next;
+		Node* headWas = new Node(head_->data,head_->next);
+		head_ = newHead;
+		size_--;
+		return headWas->data;
+	}
+
+    Node* preRemoveNode = head_;
 	for (int i = 0; i < index - 1; ++i) {
 		preRemoveNode = preRemoveNode->next;
 	}
 	Node* afterNode = preRemoveNode->next->next;
-	Element toReturn = preRemoveNode->data;
+	Node* toReturn = new Node(preRemoveNode->next->data,preRemoveNode->next->next);
 	preRemoveNode->next = afterNode;
 	size_--;
-  return toReturn;
+  return toReturn->data;
 }
 
 void LinkedList::Clear() {

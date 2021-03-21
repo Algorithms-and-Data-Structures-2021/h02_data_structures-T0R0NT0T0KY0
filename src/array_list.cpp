@@ -77,8 +77,11 @@ Element ArrayList::Remove(int index) {
   // напишите свой код здесь ...
   // 1 2 3 4 5
   Element toReturn = data_[index];
-  std::copy(data_+index+1, data_+size_,data_+index);
-  data_[index] = Element::UNINITIALIZED;
+//  std::copy(data_+index+1, data_+size_,data_+index);
+	for (int i = index; i < size_; ++i) {
+		data_[i] = data_[i+1];
+	}
+  data_[size_] = Element::UNINITIALIZED;
   size_--;
   return toReturn;
 }
@@ -86,7 +89,7 @@ Element ArrayList::Remove(int index) {
 void ArrayList::Clear() {
   // Tip 1: можете использовать std::fill для заполнения ячеек массива значением  Element::UNINITIALIZED
   // напишите свой код здесь ...
-  std::copy(data_,data_+size_,Element::UNINITIALIZED);
+  std::fill(data_,data_+size_,Element::UNINITIALIZED);
   size_=0;
 }
 
