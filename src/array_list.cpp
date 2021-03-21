@@ -39,9 +39,9 @@ void ArrayList::Add(Element e) {
 
   assert(size_ < capacity_);  // я здесь, чтобы не дать тебе сойти с правильного пути
 
-  // напишите свой код после расширения емкости массива здесь ...
-  data_[size_] = e;
-  size_++;
+	// напишите свой код после расширения емкости массива здесь ...
+	data_[size_] = e;
+	size_++;
 }
 
 void ArrayList::Insert(int index, Element e) {
@@ -59,7 +59,7 @@ void ArrayList::Insert(int index, Element e) {
 
   // Tip 2: для свдига элементов вправо можете использовать std::copy
   // напишите свой код после расширения емкости массива здесь ...
-  std::copy(data_+index, data_+size_,data_+index+1);
+    std::copy(data_+index, data_+size_,data_+index+1);
 	size_++;
 	data_[index] = e;
 }
