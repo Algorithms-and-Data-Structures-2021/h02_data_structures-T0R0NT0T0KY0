@@ -73,10 +73,11 @@ Element LinkedList::Remove(int index) {
   // напишите свой код здесь ...
 	if (index == 0){
 		Node* newHead = head_->next;
-		Node* headWas = new Node(head_->data,head_->next);
+//		Node* headWas = new Node(head_->data,head_->next);
+		Element toReturn = head_->data;
 		head_ = newHead;
 		size_--;
-		return headWas->data;
+		return toReturn;
 	}
 
     Node* preRemoveNode = head_;
@@ -84,10 +85,11 @@ Element LinkedList::Remove(int index) {
 		preRemoveNode = preRemoveNode->next;
 	}
 	Node* afterNode = preRemoveNode->next->next;
-	Node* toReturn = new Node(preRemoveNode->next->data,preRemoveNode->next->next);
+//	Node* toReturn = new Node(preRemoveNode->next->data,preRemoveNode->next->next);
+	Element toReturn = preRemoveNode->next->data;
 	preRemoveNode->next = afterNode;
 	size_--;
-  return toReturn->data;
+  return toReturn;
 }
 
 void LinkedList::Clear() {
@@ -101,6 +103,7 @@ void LinkedList::Clear() {
 		delete oldNode;
 		oldNode = nextNode;
 	}
+	delete oldNode;
 	head_= nullptr;
 	tail_= nullptr;
 	size_=0;
